@@ -28,7 +28,6 @@ import com.deimos.compilador.utils.FileHandler;
 import com.deimos.compilador.services.theme.LookAndFeelService;
 import com.deimos.compilador.utils.editor.TextLineNumber;
 import com.deimos.compilador.model.errors.CompilationErrors;
-import com.deimos.compilador.model.variables.Variables;
 import com.deimos.compilador.services.ErrorHandlerService;
 import com.deimos.compilador.utils.editor.CodeEditorUtils;
 import com.deimos.compilador.utils.editor.FontUitls;
@@ -290,7 +289,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(filler30);
 
         btn_new.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_new.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\projectAdd.png")); // NOI18N
+        btn_new.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\projectAdd.png")); // NOI18N
         btn_new.setToolTipText("Nuevo");
         btn_new.setFocusable(false);
         btn_new.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -305,7 +304,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_new);
 
         btn_open.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_open.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\abrir.png")); // NOI18N
+        btn_open.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\abrir.png")); // NOI18N
         btn_open.setToolTipText("Abrir");
         btn_open.setFocusable(false);
         btn_open.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -322,7 +321,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_open);
 
         btn_save.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_save.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\save.png")); // NOI18N
+        btn_save.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\save.png")); // NOI18N
         btn_save.setToolTipText("Guardar Como");
         btn_save.setFocusable(false);
         btn_save.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -337,7 +336,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_save);
 
         btn_save_as.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_save_as.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\save-as.png")); // NOI18N
+        btn_save_as.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\save-as.png")); // NOI18N
         btn_save_as.setToolTipText("Guardar");
         btn_save_as.setFocusable(false);
         btn_save_as.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -357,7 +356,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         jSeparator13.setPreferredSize(new java.awt.Dimension(20, 0));
         toolbar_buttons.add(jSeparator13);
 
-        btn_cut.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\tijeras.png")); // NOI18N
+        btn_cut.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\tijeras.png")); // NOI18N
         btn_cut.setToolTipText("Cortar");
         btn_cut.setFocusable(false);
         btn_cut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -371,7 +370,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         });
         toolbar_buttons.add(btn_cut);
 
-        btn_copy.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\Copiar.png")); // NOI18N
+        btn_copy.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\Copiar.png")); // NOI18N
         btn_copy.setToolTipText("Copiar");
         btn_copy.setFocusable(false);
         btn_copy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -385,7 +384,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         });
         toolbar_buttons.add(btn_copy);
 
-        btn_paste.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\clipboard.png")); // NOI18N
+        btn_paste.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\clipboard.png")); // NOI18N
         btn_paste.setToolTipText("Pegar");
         btn_paste.setFocusable(false);
         btn_paste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -400,7 +399,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_paste);
         toolbar_buttons.add(jSeparator14);
 
-        btn_undo.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\undo.png")); // NOI18N
+        btn_undo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\undo.png")); // NOI18N
         btn_undo.setToolTipText("Deshacer");
         btn_undo.setFocusable(false);
         btn_undo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -409,7 +408,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         btn_undo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         toolbar_buttons.add(btn_undo);
 
-        btn_redo.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\redo.png")); // NOI18N
+        btn_redo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\redo.png")); // NOI18N
         btn_redo.setToolTipText("Rehacer");
         btn_redo.setFocusable(false);
         btn_redo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -426,7 +425,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(filler22);
 
         btn_compilar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_compilar.setIcon(new javax.swing.ImageIcon("C:\\Users\\arcin\\Documents\\NetBeansProjects\\CompiladorJava\\src\\main\\java\\resources\\jugar.png")); // NOI18N
+        btn_compilar.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\jugar.png")); // NOI18N
         btn_compilar.setToolTipText("Compilar");
         btn_compilar.setFocusable(false);
         btn_compilar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -798,7 +797,7 @@ public class CompiladorUI extends javax.swing.JFrame {
             final String code = textPane_editor.getText();
             
             // Se crea una instancia del servicio para analisis
-            AnalysisService analysisService = new AnalysisService(new Variables());
+            AnalysisService analysisService = new AnalysisService();
                 
             // Se inicia el analisis
             analysisService.start(code);

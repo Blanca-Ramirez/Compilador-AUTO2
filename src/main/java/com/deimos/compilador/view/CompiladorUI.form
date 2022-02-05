@@ -554,7 +554,7 @@
                   <Font name="Verdana" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\projectAdd.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\projectAdd.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Nuevo"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -575,7 +575,7 @@
                   <Font name="Verdana" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\abrir.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\abrir.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Abrir"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -602,7 +602,7 @@
                   <Font name="Verdana" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\save.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\save.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Guardar Como"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -623,7 +623,7 @@
                   <Font name="Verdana" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\save-as.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\save-as.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Guardar"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -655,7 +655,7 @@
             <Component class="javax.swing.JButton" name="btn_cut">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\tijeras.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\tijeras.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Cortar"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -673,7 +673,7 @@
             <Component class="javax.swing.JButton" name="btn_copy">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\Copiar.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\Copiar.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Copiar"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -691,7 +691,7 @@
             <Component class="javax.swing.JButton" name="btn_paste">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\clipboard.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\clipboard.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Pegar"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -711,7 +711,7 @@
             <Component class="javax.swing.JButton" name="btn_undo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\undo.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\undo.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Deshacer"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -726,7 +726,7 @@
             <Component class="javax.swing.JButton" name="btn_redo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\redo.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\redo.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Rehacer"/>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -765,7 +765,7 @@
                   <Font name="Verdana" size="18" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\arcin\Documents\NetBeansProjects\CompiladorJava\src\main\java\resources\jugar.png"/>
+                  <Image iconType="2" name="C:\Users\User\Desktop\COMPILADOR\compilador\src\main\java\resources\jugar.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Compilar"/>
                 <Property name="focusable" type="boolean" value="false"/>
