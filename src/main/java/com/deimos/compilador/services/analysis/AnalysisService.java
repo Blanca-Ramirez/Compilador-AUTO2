@@ -41,7 +41,7 @@ import lombok.extern.java.Log;
 public class AnalysisService {
     
     private static final String PARSER_FAIL_ERROR_CODE = "000";
-        
+    
     public void start(String code){   
         
         // Inicializa los analizadores sintáctico y léxico

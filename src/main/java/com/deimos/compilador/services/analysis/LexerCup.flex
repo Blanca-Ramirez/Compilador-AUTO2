@@ -45,7 +45,7 @@ import java_cup.runtime.Symbol;
 
 /* --------------------- RegEx --------------------- */
 
-Letter = [a-zA-Z]
+Letter = [a-zA-Z_]
 Digit = [0-9]
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
@@ -71,6 +71,10 @@ Identifier = {Letter}+ ({Letter} | {Digit})*
 
 Number = 0 | [1-9]{Digit}*
 
+// --- Pin
+
+Pin = [A-Z]{Digit}
+
 /* ------------------ Tokens/Patterns ------------------- */
 
 %state STRING
@@ -78,7 +82,8 @@ Number = 0 | [1-9]{Digit}*
 %%
 
 // --- Keywords
-<YYINITIAL> "class"              { return symbol(sym.CLASS); }
+
+<YYINITIAL> "program"            { return symbol(sym.PROGRAM); }
 <YYINITIAL> "init"               { return symbol(sym.INIT); }
 <YYINITIAL> "iterate"            { return symbol(sym.ITERATE); }
 
@@ -93,7 +98,21 @@ Number = 0 | [1-9]{Digit}*
 <YYINITIAL> "int"                { return symbol(sym.INT); }
 <YYINITIAL> "string"             { return symbol(sym.STRING); }
 <YYINITIAL> "float"              { return symbol(sym.FLOAT); }
+
+<YYINITIAL> "start"              { return symbol(sym.START); }
+<YYINITIAL> "wait"               { return symbol(sym.WAIT); }
+<YYINITIAL> "print"              { return symbol(sym.PRINT); }
+<YYINITIAL> "mode"               { return symbol(sym.MODE); }
+<YYINITIAL> "aRead"              { return symbol(sym.A_READ); }
+<YYINITIAL> "dRead"              { return symbol(sym.D_READ); }
+<YYINITIAL> "aWrite"             { return symbol(sym.A_WRITE); }
+<YYINITIAL> "dWrite"             { return symbol(sym.D_WRITE); }
+
 <YYINITIAL> {
+
+  // --- Pin
+
+  {Pin}                          { return symbol(sym.PIN, yytext()); }
 
   // --- Identifier
 
@@ -106,6 +125,7 @@ Number = 0 | [1-9]{Digit}*
 
   // --- delimiters
 
+  ","                            { return symbol(sym.COMA); }
   ";"                            { return symbol(sym.SEMI); }
   "{"                            { return symbol(sym.LBRACKET); }
   "}"                            { return symbol(sym.RBRACKET); }
@@ -168,7 +188,7 @@ Number = 0 | [1-9]{Digit}*
 // --- Invalid Number
 
 [0]{Digit}+                                     { addLexicalError(INVALID_NUMBER_ERROR_CODE, yyline+1, INVALID_NUMBER_MESSAGE, yytext()); return symbol(sym.INVALID_NUMBER); }
-[\n][^\"\n]*[\"][^\"\n]*[\n]                    { addLexicalError(INVALID_CHARACTER_ERROR_CODE, yyline+1, UNCLOSED_STRING_MESSAGE, yytext()); return symbol(sym.ERROR); }
+[\n][^\"\n]*[\"][^\"\n]*[\n]                    { addLexicalError(INVALID_CHARACTER_ERROR_CODE, yyline+2, UNCLOSED_STRING_MESSAGE, yytext()); return symbol(sym.ERROR); }
 
 // --- Invalid Character
 

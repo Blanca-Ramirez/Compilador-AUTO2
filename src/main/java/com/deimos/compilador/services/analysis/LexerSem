@@ -1,14 +1,9 @@
 /* JFlex example: partial Java language lexer specification */
 
-package com.deimos.compilador.services.paint;
-
-import com.deimos.compilador.model.painter.PaintRequest;
-import com.deimos.compilador.utils.EditorColors;
-import java.awt.Color;
-import java.util.List;
+package com.deimos.compilador.services;
 
 %%
-%class LexerPainter
+%class LexerSem
 %type Tokens
 %unicode
 %full
@@ -16,17 +11,9 @@ import java.util.List;
 %char
 %column
 
-%{
-  private void addPaintRequest(int posIni, int posFin, Color color){
-    List<PaintRequest> paintRequests = PaintService.paintRequestList.getPaintRequests();
-    PaintRequest paintRequest = new PaintRequest(posIni, posFin, color);
-    paintRequests.add(paintRequest);
-  }
-%}
-
 /* --------------------- RegEx --------------------- */
 
-Letter = [a-zA-Z_]
+Letter = [a-zA-Z]
 Digit = [0-9]
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
@@ -48,17 +35,9 @@ CommentContent       = ( [^*] | \*+ [^/*] )*
 
 Identifier = {Letter}+ ({Letter} | {Digit})*
 
-// --- Constant
-
-Constant = [A-Z][A-Z_]+
-
 // --- Number
 
 Number = 0 | [1-9]{Digit}*
-
-// --- Pin
-
-Pin = [A-Z]{Digit}
 
 /* ------------------ Tokens/Patterns ------------------- */
 
@@ -69,28 +48,9 @@ Pin = [A-Z]{Digit}
 "init"                         
 | "iterate"                    { addPaintRequest(yychar, yylength(), EditorColors.METHODS); }
 
-// --- Functions
-
-"start"            
-| "wait"            
-| "aRead"
-| "dRead"                 
-| "print"
-| "mode"
-| "dWrite"   
-| "aWrite"                      { addPaintRequest(yychar, yylength(), EditorColors.FUNCTIONS); }    
-
-// --- Number
-
-{Pin}
-| "OUTPUT"
-| "HIGH"
-| "LOW"
-| {Number}                     { addPaintRequest(yychar, yylength(), EditorColors.NUMBERS); }      
-
 // --- Keywords
 
-"program"              
+"class"              
 | "if"                
 | "else"               
 | "for"                
@@ -101,6 +61,10 @@ Pin = [A-Z]{Digit}
 | "int"                
 | "string"             
 | "float"                      { addPaintRequest(yychar, yylength(), EditorColors.KEYWORDS); }
+
+// --- Number
+
+{Number}                       { addPaintRequest(yychar, yylength(), EditorColors.NUMBERS); }
 
 // --- String
 
@@ -137,8 +101,7 @@ Pin = [A-Z]{Digit}
   | ">="                            
   | "<="                            
   | "&& "                          
-  | "||"
-  | ","                       
+  | "||"                       
   | {Identifier}               { addPaintRequest(yychar, yylength(), EditorColors.DEFAULT); }
 
 // --- Comments

@@ -24,16 +24,22 @@
 package com.deimos.compilador.view;
 
 import com.deimos.compilador.services.analysis.AnalysisService;
-import com.deimos.compilador.utils.FileHandler;
 import com.deimos.compilador.services.theme.LookAndFeelService;
-import com.deimos.compilador.utils.editor.TextLineNumber;
 import com.deimos.compilador.model.errors.CompilationErrors;
-import com.deimos.compilador.services.ErrorHandlerService;
 import com.deimos.compilador.utils.editor.CodeEditorUtils;
+import com.deimos.compilador.services.ErrorHandlerService;
+import com.deimos.compilador.utils.editor.TextLineNumber;
+import com.deimos.compilador.services.paint.PaintService;
 import com.deimos.compilador.utils.editor.FontUitls;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.ImageIcon;
+import com.deimos.compilador.utils.StringConstants;
 import com.deimos.compilador.utils.EditorColors;
+import com.deimos.compilador.utils.FileHandler;
+import javax.swing.JRadioButtonMenuItem;
+import lombok.extern.java.Log;
+import javax.swing.JTextPane;
+import javax.swing.ImageIcon;
+import javax.swing.Icon;
+import java.awt.Image;
 
 import static com.deimos.compilador.utils.StringConstants.PROJECT_CONFIG;
 import static com.deimos.compilador.utils.StringConstants.PROJECT_FOLDER;
@@ -46,9 +52,6 @@ import static com.deimos.compilador.services.theme.LookAndFeelService.MATERIAL_L
 import static com.deimos.compilador.services.theme.LookAndFeelService.MONOKAI;
 import static com.deimos.compilador.services.theme.LookAndFeelService.MOONLIGHT;
 import static com.deimos.compilador.services.theme.LookAndFeelService.ONE_DARK;
-import com.deimos.compilador.services.paint.PaintService;
-import javax.swing.JTextPane;
-import lombok.extern.java.Log;
 
 /**
  *
@@ -61,7 +64,7 @@ import lombok.extern.java.Log;
 public class CompiladorUI extends javax.swing.JFrame {
         
     private final FileHandler lookAndFeelFile;
-    
+       
     /**
      * 
      * Crea el form para el Compiler
@@ -79,6 +82,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         log.info("Inicializando componentes\n");
         initComponents();    
         initCodeEditor();
+        initIcons();    
         
         /**
          * Crea un instancia del manejador de archivos (FileHandler)
@@ -132,9 +136,6 @@ public class CompiladorUI extends javax.swing.JFrame {
 
         jFrame1 = new javax.swing.JFrame();
         panel_contenedor = new javax.swing.JPanel();
-        jSplitPane1 = new javax.swing.JSplitPane();
-        scroll_panel_tree = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
         splitPane_main = new javax.swing.JSplitPane();
         scrollPane_editor = new javax.swing.JScrollPane();
         textPane_editor = new javax.swing.JTextPane()  {
@@ -174,6 +175,8 @@ public class CompiladorUI extends javax.swing.JFrame {
         menuItem_cut = new javax.swing.JMenuItem();
         menuItem_copy = new javax.swing.JMenuItem();
         menuItem_paste = new javax.swing.JMenuItem();
+        menu_btn_undo = new javax.swing.JMenuItem();
+        menu_btn_redo = new javax.swing.JMenuItem();
         menu_view = new javax.swing.JMenu();
         menu_toolbar = new javax.swing.JCheckBoxMenuItem();
         menu_run = new javax.swing.JMenu();
@@ -206,25 +209,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 102, 102));
         setIconImage(new ImageIcon("src/main/java/resources/icon.png").getImage());
 
-        jSplitPane1.setDividerLocation(240);
-        jSplitPane1.setDividerSize(20);
-
-        scroll_panel_tree.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jTree1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Workspace");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo.scl");
-        treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.setFocusable(false);
-        jTree1.setMaximumSize(new java.awt.Dimension(104, 120));
-        jTree1.setMinimumSize(new java.awt.Dimension(20, 120));
-        jTree1.setShowsRootHandles(true);
-        scroll_panel_tree.setViewportView(jTree1);
-
-        jSplitPane1.setLeftComponent(scroll_panel_tree);
-
-        splitPane_main.setDividerLocation(425);
+        splitPane_main.setDividerLocation(520);
         splitPane_main.setDividerSize(20);
         splitPane_main.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         splitPane_main.setResizeWeight(0.7);
@@ -254,6 +239,7 @@ public class CompiladorUI extends javax.swing.JFrame {
 
         scrollPane_console.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         scrollPane_console.setForeground(new java.awt.Color(102, 102, 102));
+        scrollPane_console.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollPane_console.setFocusCycleRoot(true);
 
         textPane_console.setBorder(null);
@@ -265,20 +251,21 @@ public class CompiladorUI extends javax.swing.JFrame {
 
         splitPane_main.setBottomComponent(scrollPane_console);
 
-        jSplitPane1.setRightComponent(splitPane_main);
-
         javax.swing.GroupLayout panel_contenedorLayout = new javax.swing.GroupLayout(panel_contenedor);
         panel_contenedor.setLayout(panel_contenedorLayout);
         panel_contenedorLayout.setHorizontalGroup(
             panel_contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_contenedorLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jSplitPane1)
-                .addGap(20, 20, 20))
+                .addGap(30, 30, 30)
+                .addComponent(splitPane_main)
+                .addGap(30, 30, 30))
         );
         panel_contenedorLayout.setVerticalGroup(
             panel_contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+            .addGroup(panel_contenedorLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(splitPane_main, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+                .addGap(9, 9, 9))
         );
 
         toolbar_buttons.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -289,7 +276,6 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(filler30);
 
         btn_new.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_new.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\projectAdd.png")); // NOI18N
         btn_new.setToolTipText("Nuevo");
         btn_new.setFocusable(false);
         btn_new.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -304,7 +290,6 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_new);
 
         btn_open.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_open.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\abrir.png")); // NOI18N
         btn_open.setToolTipText("Abrir");
         btn_open.setFocusable(false);
         btn_open.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -321,8 +306,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_open);
 
         btn_save.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_save.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\save.png")); // NOI18N
-        btn_save.setToolTipText("Guardar Como");
+        btn_save.setToolTipText("Guardar ");
         btn_save.setFocusable(false);
         btn_save.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_save.setMaximumSize(new java.awt.Dimension(48, 48));
@@ -336,8 +320,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_save);
 
         btn_save_as.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_save_as.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\save-as.png")); // NOI18N
-        btn_save_as.setToolTipText("Guardar");
+        btn_save_as.setToolTipText("Guardar como");
         btn_save_as.setFocusable(false);
         btn_save_as.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_save_as.setMaximumSize(new java.awt.Dimension(48, 48));
@@ -356,7 +339,6 @@ public class CompiladorUI extends javax.swing.JFrame {
         jSeparator13.setPreferredSize(new java.awt.Dimension(20, 0));
         toolbar_buttons.add(jSeparator13);
 
-        btn_cut.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\tijeras.png")); // NOI18N
         btn_cut.setToolTipText("Cortar");
         btn_cut.setFocusable(false);
         btn_cut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -370,7 +352,6 @@ public class CompiladorUI extends javax.swing.JFrame {
         });
         toolbar_buttons.add(btn_cut);
 
-        btn_copy.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\Copiar.png")); // NOI18N
         btn_copy.setToolTipText("Copiar");
         btn_copy.setFocusable(false);
         btn_copy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -384,7 +365,6 @@ public class CompiladorUI extends javax.swing.JFrame {
         });
         toolbar_buttons.add(btn_copy);
 
-        btn_paste.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\clipboard.png")); // NOI18N
         btn_paste.setToolTipText("Pegar");
         btn_paste.setFocusable(false);
         btn_paste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -399,16 +379,19 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(btn_paste);
         toolbar_buttons.add(jSeparator14);
 
-        btn_undo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\undo.png")); // NOI18N
         btn_undo.setToolTipText("Deshacer");
         btn_undo.setFocusable(false);
         btn_undo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_undo.setMaximumSize(new java.awt.Dimension(48, 48));
         btn_undo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btn_undo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_undo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_undoActionPerformed(evt);
+            }
+        });
         toolbar_buttons.add(btn_undo);
 
-        btn_redo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\redo.png")); // NOI18N
         btn_redo.setToolTipText("Rehacer");
         btn_redo.setFocusable(false);
         btn_redo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -425,7 +408,6 @@ public class CompiladorUI extends javax.swing.JFrame {
         toolbar_buttons.add(filler22);
 
         btn_compilar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        btn_compilar.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Desktop\\COMPILADOR\\compilador\\src\\main\\java\\resources\\jugar.png")); // NOI18N
         btn_compilar.setToolTipText("Compilar");
         btn_compilar.setFocusable(false);
         btn_compilar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -444,7 +426,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         pane_toolbarLayout.setHorizontalGroup(
             pane_toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pane_toolbarLayout.createSequentialGroup()
-                .addComponent(toolbar_buttons, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+                .addComponent(toolbar_buttons, javax.swing.GroupLayout.DEFAULT_SIZE, 1490, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         pane_toolbarLayout.setVerticalGroup(
@@ -464,6 +446,11 @@ public class CompiladorUI extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText("New File");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         menu_file.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -477,6 +464,11 @@ public class CompiladorUI extends javax.swing.JFrame {
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem4.setText("Save File");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         menu_file.add(jMenuItem4);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -519,6 +511,24 @@ public class CompiladorUI extends javax.swing.JFrame {
             }
         });
         menu_edit.add(menuItem_paste);
+
+        menu_btn_undo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menu_btn_undo.setText("Undo");
+        menu_btn_undo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_btn_undoActionPerformed(evt);
+            }
+        });
+        menu_edit.add(menu_btn_undo);
+
+        menu_btn_redo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menu_btn_redo.setText("Redo");
+        menu_btn_redo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_btn_redoActionPerformed(evt);
+            }
+        });
+        menu_edit.add(menu_btn_redo);
 
         menuBar_principal.add(menu_edit);
 
@@ -643,7 +653,7 @@ public class CompiladorUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pane_toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(25, 25, 25))
         );
@@ -701,14 +711,16 @@ public class CompiladorUI extends javax.swing.JFrame {
 
     private void textPane_editorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPane_editorKeyPressed
         PaintService.start(textPane_editor);
+        CodeEditorUtils.hasChanged = true;
     }//GEN-LAST:event_textPane_editorKeyPressed
 
     private void textPane_editorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPane_editorKeyReleased
         PaintService.start(textPane_editor);
+        CodeEditorUtils.hasChanged = true;
     }//GEN-LAST:event_textPane_editorKeyReleased
 
     private void btn_redoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_redoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btn_redoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -716,7 +728,7 @@ public class CompiladorUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
-       CodeEditorUtils.actionNew();
+        CodeEditorUtils.actionNew();
     }//GEN-LAST:event_btn_newActionPerformed
 
     private void btn_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_openActionPerformed
@@ -737,11 +749,11 @@ public class CompiladorUI extends javax.swing.JFrame {
     }//GEN-LAST:event_textPane_editorKeyTyped
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        CodeEditorUtils.actionOpen();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        CodeEditorUtils.actionSaveAs();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void IncFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncFontActionPerformed
@@ -773,6 +785,26 @@ public class CompiladorUI extends javax.swing.JFrame {
     private void menuBar_principalComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_menuBar_principalComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_menuBar_principalComponentHidden
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        CodeEditorUtils.actionNew();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        CodeEditorUtils.actionSave();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void btn_undoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_undoActionPerformed
+
+    }//GEN-LAST:event_btn_undoActionPerformed
+
+    private void menu_btn_redoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_btn_redoActionPerformed
+
+    }//GEN-LAST:event_menu_btn_redoActionPerformed
+
+    private void menu_btn_undoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_btn_undoActionPerformed
+ 
+    }//GEN-LAST:event_menu_btn_undoActionPerformed
     
     /**
      * Inicia la compilación. Llama a los métodos de analisis, generación de código y al manejador de errores
@@ -788,7 +820,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         
         // Si el código no ha cambiado y el código está guardado,
         // se inicia la compilación
-        if(CodeEditorUtils.hasChanged == false && CodeEditorUtils.currentFile != null){           
+        if(CodeEditorUtils.hasChanged == false && CodeEditorUtils.currentFile != null){
             
             // Se crea una instancia del manejador de errores
             ErrorHandlerService errorHandler = new ErrorHandlerService(new CompilationErrors());
@@ -866,6 +898,38 @@ public class CompiladorUI extends javax.swing.JFrame {
         radioMenuBehavior(radioMenu);
     }
     
+    private void initIcons(){
+        Icon newIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "projectAdd.png");
+        Icon openIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "abrir.png");
+        Icon saveIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "save.png");
+        Icon saveAsIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "save-as.png");
+        
+        Icon copyIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "Copiar.png");
+        Icon cutIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "tijeras.png");
+        Icon pasteIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "clipboard.png");
+        
+        Icon undoIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "undo.png");
+        Icon redoIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "redo.png");
+        Icon compileIcon = new ImageIcon(StringConstants.RESOURCES_DIRECTORY + "jugar.png");
+        
+        Image frameIcon = new ImageIcon("src/main/java/resources/icon.png").getImage();
+       
+        btn_new.setIcon(newIcon);
+        btn_open.setIcon(openIcon);
+        btn_save.setIcon(saveIcon);
+        btn_save_as.setIcon(saveAsIcon);
+        
+        btn_copy.setIcon(copyIcon);
+        btn_cut.setIcon(cutIcon);
+        btn_paste.setIcon(pasteIcon);
+        
+        btn_undo.setIcon(undoIcon);
+        btn_redo.setIcon(redoIcon);
+        btn_compilar.setIcon(compileIcon);
+        
+        this.setIconImage(frameIcon);
+    }
+   
     /**
      *
      * Inicializa los campos de CodeEditorUtils y
@@ -877,6 +941,7 @@ public class CompiladorUI extends javax.swing.JFrame {
         CodeEditorUtils.jTextPaneEditor = this.textPane_editor;
         CodeEditorUtils.jTextPaneConsole = this.textPane_console;
         PaintService.start(textPane_editor);
+        textPane_console.setEditable(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -905,12 +970,12 @@ public class CompiladorUI extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator13;
     private javax.swing.JToolBar.Separator jSeparator14;
     private javax.swing.JToolBar.Separator jSeparator15;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTree jTree1;
     private javax.swing.JMenuBar menuBar_principal;
     private javax.swing.JMenuItem menuItem_copy;
     private javax.swing.JMenuItem menuItem_cut;
     private javax.swing.JMenuItem menuItem_paste;
+    private javax.swing.JMenuItem menu_btn_redo;
+    private javax.swing.JMenuItem menu_btn_undo;
     private javax.swing.JMenuItem menu_change_font;
     private javax.swing.JMenu menu_edit;
     private javax.swing.JMenu menu_file;
@@ -928,7 +993,6 @@ public class CompiladorUI extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem radioMenu_One_Dark;
     private javax.swing.JScrollPane scrollPane_console;
     private javax.swing.JScrollPane scrollPane_editor;
-    private javax.swing.JScrollPane scroll_panel_tree;
     private javax.swing.JSplitPane splitPane_main;
     private javax.swing.JTextPane textPane_console;
     private javax.swing.JTextPane textPane_editor;

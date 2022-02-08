@@ -43,6 +43,7 @@ import static com.deimos.compilador.utils.StringConstants.FILE_TYPE_NAME;
 import static com.deimos.compilador.utils.StringConstants.PROJECT_FOLDER;
 import static com.deimos.compilador.utils.StringConstants.PROJECT_WORKSPACE;
 import static com.deimos.compilador.utils.StringConstants.USER_DOCUMENTS_FOLDER;
+import javax.swing.undo.UndoManager;
 
 /**
  * Provides Static Methods Needed to handle file operations
@@ -214,63 +215,12 @@ public class CodeEditorUtils {
                         newContent = newContent + "\n" + content;
                     }
                     
+                    jTextPaneConsole.setText(EMPTY);
                     jTextPaneEditor.setText(newContent);
                     PaintService.start(jTextPaneEditor);
                 }
  
                 jFrame.setTitle(FILE_TYPE_NAME + " - " + file.getName());
- 
-                currentFile = file;
-                hasChanged = false;
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(jFrame,
-                                              ex.getMessage(),
-                                              ex.toString(),
-                                              JOptionPane.ERROR_MESSAGE);
-            }
-        }       
-    }
-    
-        /**
-     *
-     * Open File     */
-    public static void actionOpenFolder() {
-        if (hasChanged == true) {
-            int option = JOptionPane.showConfirmDialog(jFrame, "¿Desea guardar los cambios?");
- 
-            switch (option) {
-                case JOptionPane.YES_OPTION:     
-                    actionSave();               
-                    break;
-                case JOptionPane.CANCEL_OPTION: 
-                    return;    
-            }           
-        }       
- 
-        JFileChooser fileChooser = getJFileChooser(); 
- 
-        int state = fileChooser.showOpenDialog(jFrame);
-        String content, newContent;
-        
-        if (state == JFileChooser.APPROVE_OPTION) {  
-            File file = fileChooser.getSelectedFile();    
-            if (!(file.getName().endsWith(EXTENSION))) {
-                JOptionPane.showMessageDialog(null, "Solo los archivos con extensión ".concat(EXTENSION).concat(" son admitidos"));
-                actionOpen();
-                return;
-            }
-            try {
-                try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-                    newContent = bufferedReader.readLine();
-                    
-                    while ((content = bufferedReader.readLine()) != null) {
-                        newContent = newContent + "\n" + content;
-                    }
-                    
-                    jTextPaneEditor.setText(newContent);
-                }
- 
-                jFrame.setTitle(FILE_TYPE_NAME.concat(" - ").concat(file.getName()));
  
                 currentFile = file;
                 hasChanged = false;
